@@ -11,7 +11,7 @@ app.set("view engine", "pug");
 var date = new Date();
 var time = date.toUTCString().split(" ");
 var array = arr.r(9, 9);
-var day = (time[0] = !"Sat" || "Sun" ? (day = true) : (day = false));
+var day = time[0] == !"Sat" || "Sun" ? (day = true) : (day = false);
 var hours = array.includes(Number(time[4].substring(0, 2)))
   ? (hours = true)
   : (hours = false);
@@ -28,7 +28,7 @@ if (day && hours === true) {
     res.render("Services", { title: "Services" });
   });
 } else {
-  app.get("/", (req, res) => {
+  app.all("*", (req, res) => {
     res.send("Time Is Up");
   });
 }
